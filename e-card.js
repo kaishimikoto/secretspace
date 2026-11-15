@@ -83,3 +83,5 @@ hotspots.forEach((spot) => {
 noteModal.addEventListener("click", () => {
     noteModal.style.display = "none";
 });
+
+popupNoteCard.addEventListener("click", (e) => e.stopPropagation());
