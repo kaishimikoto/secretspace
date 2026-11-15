@@ -3,18 +3,21 @@
     margin: 0;
     padding: 0;
 }
+
 body {
     background-color: #fff7b0;
     font-family: 'Press Start 2P', monospace;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 12px;
+    overflow-x: hidden;
     image-rendering: pixelated;
 }
 
-/* LOGIN GATE */
+/* ---------- LOGIN GATE ---------- */
 #login-wrapper {
     position: relative;
     display: flex;
@@ -23,15 +26,16 @@ body {
 }
 
 #login-screen {
+    --w: min(620px, 94vw);
+    --h: calc(var(--w) * 0.742);
+
     background-image: url('images/form.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    width: 620px;
-    height: 460px;
-    padding: 22px 45px 35px 45px;
-    margin-bottom: 80px;
-    flex-direction: column;
-    justify-content: space-between;
+    width: var(--w);
+    height: var(--h);
+    padding: calc(var(--h) * 0.048) calc(var(--w) * 0.0726) calc(var(--h) * 0.076);
+    margin-bottom: calc(var(--h) * 0.174);
     position: relative;
 }
 
@@ -41,12 +45,12 @@ body {
     font-size: 15px;
     line-height: 1.6;
     text-shadow: 2px 2px 0 #9e008c;
-    padding: 0 20px 0 20px;
-    margin-top: 50px;
+    padding: 0 20px;
+    margin-top: calc(var(--h) * 0.109);
 }
 
 .form-fields {
-    margin: 40px 20px 40px 20px;
+    margin: calc(var(--h) * 0.087) calc(var(--w) * 0.032);
 }
 
 label {
@@ -57,13 +61,7 @@ label {
 }
 
 .password-field {
-    margin-top: 20px;
-    margin-bottom: 20px;
-
-}
-
-.input-group {
-    margin-bottom: 18px;
+    margin: 20px 0;
 }
 
 input {
@@ -107,12 +105,14 @@ input {
     display: none;
 }
 
-/* CHALKBOARD */
+/* ---------- CHALKBOARD ---------- */
 #chalkboard {
+    --bw: min(960px, 96vw, calc(94dvh * 16 / 9));
+
     display: none;
     position: relative;
-    width: 960px;
-    height: 540px;
+    width: var(--bw);
+    aspect-ratio: 16 / 9;
     background-image: url('images/board.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -127,10 +127,12 @@ input {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 18px;
+    gap: 7% 4.5%;
+    counter-reset: n;
 }
 
 .note {
+    counter-increment: n;
     cursor: pointer;
     border-radius: 4px;
     background-size: 100% 100%;
@@ -138,7 +140,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 9px;
+    font-size: calc(var(--bw) * 0.009375);
     color: #4a0042;
     transition: transform 0.15s ease;
 }
@@ -148,8 +150,9 @@ input {
 
 .note:hover {
     transform: scale(1.06);
-}   
+}
 
+/* ---------- NOTE POPUP ---------- */
 #note-modal {
     display: none;
     position: fixed;
@@ -162,11 +165,13 @@ input {
 }
 
 .popup-note-card {
-    width: 440px;
-    height: 440px;
+    --card: min(440px, 92vw, 88dvh);
+
+    width: var(--card);
+    height: var(--card);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    padding: 65px 48px 45px 48px;
+    padding: calc(var(--card) * 0.148) calc(var(--card) * 0.109) calc(var(--card) * 0.102);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -184,11 +189,11 @@ input {
 
 @keyframes popIn {
     from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    to   { transform: scale(1); opacity: 1; }
 }
 
 .note-title {
-    font-size: 11px;
+    font-size: max(9px, calc(var(--card) * 0.025));
     color: #5c1a54;
     border-bottom: 2px dashed rgba(0, 0, 0, 0.25);
     padding-bottom: 10px;
@@ -196,39 +201,82 @@ input {
 }
 
 .note-text {
-    font-size: 12px;
+    font-size: max(10px, calc(var(--card) * 0.0273));
     line-height: 2;
     flex-grow: 1;
     overflow-y: auto;
     min-height: 0;
     font-family: 'Geist Pixel', monospace;
     white-space: pre-line;
+    overscroll-behavior: contain;
 }
 
 .close-hint {
-    font-size: 7.5px;
+    font-size: max(6.5px, calc(var(--card) * 0.017));
     text-align: center;
     opacity: 0.65;
-    margin-top: 20px;
-    color:hsla(307, 56%, 23%, 0.708);
+    margin-top: calc(var(--card) * 0.045);
+    color: hsla(307, 56%, 23%, 0.708);
 }
 
-/* Chrome, Edge, Safari */
-.note-text::-webkit-scrollbar {
-    width: 5px;
-}
+/* Scrollbar: Chrome, Edge, Safari */
+.note-text::-webkit-scrollbar { width: 5px; }
+.note-text::-webkit-scrollbar-thumb { background-color: #2e9e4f; border-radius: 0; }
+.note-text::-webkit-scrollbar-track { background: transparent; }
 
-.note-text::-webkit-scrollbar-thumb {
-    background-color: #2e9e4f;
-    border-radius: 0;
-}
-
-.note-text::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-/* Firefox */
+/* Scrollbar: Firefox */
 .note-text {
     scrollbar-width: thin;
     scrollbar-color: #2e9e4f transparent;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+/* Tablets and phones */
+@media (max-width: 720px) {
+    .note {
+        font-size: 0;
+    }
+    .note::after {
+        content: counter(n);
+        font-size: max(9px, calc(var(--bw) * 0.03));
+    }
+}
+
+/* Phones */
+@media (max-width: 640px) {
+    #login-screen {
+        --w: min(94vw, 420px);
+        --h: calc(var(--w) * 1.2);
+    }
+
+    .login-title {
+        font-size: 11px;
+        padding: 0;
+    }
+
+    .form-fields {
+        margin-top: calc(var(--h) * 0.05);
+        margin-bottom: 0;
+    }
+
+    label {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+
+    .password-field {
+        margin: 12px 0;
+    }
+
+    input {
+        padding: 8px;
+        font-size: 9px;
+    }
+
+    .login-btn {
+        font-size: 9px;
+        height: 36px;
+        padding: 8px 14px;
+    }
 }
