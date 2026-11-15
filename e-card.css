@@ -251,8 +251,21 @@ input {
     }
 
     .login-title {
-        font-size: 11px;
-        padding: 0;
+        font-size: calc(var(--w) * 0.026);  
+        line-height: 1.7;
+        padding: 0 calc(var(--w) * 0.1);    
+        margin-top: calc(var(--h) * 0.075);
+        text-shadow: 1px 1px 0 #9e008c;
+    }
+
+    .login-title h3 {
+        font-size: 1.35em;                  
+        margin-bottom: 4px;
+    }
+
+    .login-title p {
+        font-size: 1em;
+        overflow-wrap: break-word;          
     }
 
     .form-fields {
