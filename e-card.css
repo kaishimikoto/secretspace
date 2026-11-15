@@ -27,52 +27,53 @@ body {
 
 #login-screen {
     --w: min(620px, 94vw);
-    --h: calc(var(--w) * 0.742);
+    --u: calc(var(--w) / 620);
 
     background-image: url('images/form.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: var(--w);
-    height: var(--h);
-    padding: calc(var(--h) * 0.048) calc(var(--w) * 0.0726) calc(var(--h) * 0.076);
-    margin-bottom: calc(var(--h) * 0.174);
+    height: calc(var(--u) * 460);
+    padding: calc(var(--u) * 22) calc(var(--u) * 45) calc(var(--u) * 35);
+    margin-bottom: calc(var(--u) * 80);
     position: relative;
 }
 
 .login-title {
     color: #fff;
     text-align: center;
-    font-size: 15px;
+    font-size: calc(var(--u) * 15);
     line-height: 1.6;
-    text-shadow: 2px 2px 0 #9e008c;
-    padding: 0 20px;
-    margin-top: calc(var(--h) * 0.109);
+    text-shadow: calc(var(--u) * 2) calc(var(--u) * 2) 0 #9e008c;
+    padding: 0 calc(var(--u) * 20);
+    margin-top: calc(var(--u) * 50);
 }
 
 .form-fields {
-    margin: calc(var(--h) * 0.087) calc(var(--w) * 0.032);
+    margin: calc(var(--u) * 40) calc(var(--u) * 20);
 }
 
 label {
-    font-size: 18px;
+    font-size: calc(var(--u) * 18);
     color: #b1189b;
-    margin-bottom: 8px;
+    margin-bottom: calc(var(--u) * 8);
     display: block;
 }
 
 .password-field {
-    margin: 20px 0;
+    margin: calc(var(--u) * 20) 0;
 }
 
 input {
     width: 100%;
-    padding: 10px;
-    border: 3px inset #f046d3;
+    padding: calc(var(--u) * 10);
+    border: max(2px, calc(var(--u) * 3)) inset #f046d3;
     background-color: #ffffff;
     font-family: 'Press Start 2P', monospace;
-    font-size: 11px;
+    font-size: max(8px, calc(var(--u) * 11));
     color: #4a0042;
     outline: none;
+    touch-action: manipulation;
 }
 
 .btn-container {
@@ -82,26 +83,26 @@ input {
 .login-btn {
     background-color: #e62ed0;
     color: #ffffff;
-    border: 3px solid #8a007a;
-    border-radius: 12px;
-    padding: 10px 18px;
+    border: max(2px, calc(var(--u) * 3)) solid #8a007a;
+    border-radius: calc(var(--u) * 12);
+    padding: 0 calc(var(--u) * 18);
     font-family: 'Press Start 2P', monospace;
-    font-size: 10px;
+    font-size: max(8px, calc(var(--u) * 10));
     cursor: pointer;
-    box-shadow: 0 3px 0 #4a0042;
-    height: 40px;
+    box-shadow: 0 calc(var(--u) * 3) 0 #4a0042;
+    height: calc(var(--u) * 40);
 }
 
 .login-btn:active {
-    transform: translateY(3px);
+    transform: translateY(2px);
     box-shadow: none;
 }
 
 #error-msg {
     color: #d90429;
-    font-size: 8px;
+    font-size: max(7px, calc(var(--u) * 8));
     text-align: center;
-    margin-top: 8px;
+    margin-top: calc(var(--u) * 8);
     display: none;
 }
 
@@ -243,53 +244,6 @@ input {
     }
 }
 
-/* Phones */
-@media (max-width: 640px) {
-    #login-screen {
-        --w: min(94vw, 420px);
-        --h: calc(var(--w) * 1.2);
-    }
-
-    .login-title {
-        font-size: calc(var(--w) * 0.026);  
-        line-height: 1.7;
-        padding: 0 calc(var(--w) * 0.1);    
-        margin-top: calc(var(--h) * 0.075);
-        text-shadow: 1px 1px 0 #9e008c;
-    }
-
-    .login-title h3 {
-        font-size: 1.35em;                  
-        margin-bottom: 4px;
-    }
-
-    .login-title p {
-        font-size: 1em;
-        overflow-wrap: break-word;          
-    }
-
-    .form-fields {
-        margin-top: calc(var(--h) * 0.05);
-        margin-bottom: 0;
-    }
-
-    label {
-        font-size: 11px;
-        margin-bottom: 6px;
-    }
-
-    .password-field {
-        margin: 12px 0;
-    }
-
-    input {
-        padding: 8px;
-        font-size: 9px;
-    }
-
-    .login-btn {
-        font-size: 9px;
-        height: 36px;
-        padding: 8px 14px;
-    }
+@media (hover: none) {
+    input { font-size: 16px; }
 }
